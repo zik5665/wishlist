@@ -26,8 +26,20 @@ function renderSingleWish(wish) {
     }
 
     // Ссылка на покупку (если есть)
+    // Ссылка на покупку (если есть)
     if (wish.link) {
-        htmlContent += `<a href="${wish.link}" target="_blank" style="display: block; background: #f1f2f6; color: #2f3542; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: bold; width: 100%; text-align: center; margin-top: 15px; box-sizing: border-box; transition: 0.2s;">🛒 Открыть в магазине</a>`;
+        let cleanLink = wish.link.trim();
+
+        // Умный поиск: если вставили текст вместе со ссылкой (как делает кнопка "Поделиться" в Озон/WB)
+        const linkMatch = cleanLink.match(/(https?:\/\/[^\s]+)/);
+
+        if (linkMatch) {
+            cleanLink = linkMatch[0]; // Вытаскиваем строго саму ссылку
+        } else if (!cleanLink.startsWith('http')) {
+            cleanLink = 'https://' + cleanLink; // Добавляем https://, если ввели просто "ozon.ru/..."
+        }
+
+        htmlContent += `<a href="${cleanLink}" target="_blank" style="display: block; background: #f1f2f6; color: #2f3542; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: bold; width: 100%; text-align: center; margin-top: 15px; box-sizing: border-box; transition: 0.2s;">🛒 Открыть в магазине</a>`;
     }
 
     // Закрываем скрытый блок
