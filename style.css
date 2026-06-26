@@ -143,21 +143,50 @@ h2 {
 }
 
 /* Сама карточка товара */
+/* --- Сама карточка товара (Обновленная) --- */
 .wish-item {
     background: #fff;
     border: 1px solid #eee;
-    padding: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
-    display: flex;
+    display: block; /* Убрали flex, чтобы список раскрывался вниз */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: transform 0.2s;
+    overflow: hidden; /* Чтобы углы оставались круглыми */
 }
 
     .wish-item:hover {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
         box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
+
+/* Шапка карточки (которую мы видим всегда) */
+.wish-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer; /* Курсор-пальчик при наведении */
+    background: #fff;
+    transition: background 0.2s;
+}
+
+    .wish-header:hover {
+        background: #fafafa;
+    }
+
+/* Стрелочка-индикатор рядом с названием */
+.arrow-icon {
+    font-size: 12px;
+    color: #a4b0be;
+    margin-left: 8px;
+}
+
+/* Скрытый блок с картинкой и ссылкой */
+.wish-details {
+    padding: 0 15px 15px 15px;
+    border-top: 1px dashed #eee; /* Легкая пунктирная линия */
+}
 /* Настройки для аватарок в заголовках */
 .avatar-icon {
     width: 40px; /* Ширина картинки */

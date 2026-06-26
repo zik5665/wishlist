@@ -1,30 +1,37 @@
 ﻿// ВАЖНО: Вставь сюда НОВУЮ ссылку из Google Apps Script!
 const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbyTaxF1m6ui6PaKDwlqF9E_JWHWzhciuw1OzMGUtvpMFZu0jrsYDhHYVRxivVmVgYs6yQ/exec';
 // Обновленная функция для отрисовки красивой карточки
+// Обновленная функция для отрисовки карточки-аккордеона
 function renderSingleWish(wish) {
     const li = document.createElement('li');
     li.className = 'wish-item';
     li.id = `wish-${wish.id}`;
-    li.style.flexDirection = 'column';
-    li.style.alignItems = 'center'; /* Центрируем содержимое */
-    li.style.gap = '12px';
-    li.style.position = 'relative';
 
-    // Заголовок и крестик
-    let htmlContent = `<div style="display: flex; justify-content: space-between; width: 100%; align-items: flex-start;">
-                           <strong style="font-size: 18px; text-align: left;">${wish.item}</strong>
-                           <button class="btn-delete" onclick="deleteWish('${wish.id}')" style="margin-left: 10px;">❌</button>
-                       </div>`;
+    // Шапка карточки (кликабельная)
+    // event.stopPropagation() нужен, чтобы при нажатии на крестик меню не открывалось
+    let htmlContent = `
+        <div class="wish-header" onclick="toggleWishDetails('${wish.id}')">
+            <strong style="font-size: 16px; text-align: left;">
+                ${wish.item} <span class="arrow-icon" id="arrow-${wish.id}">▼</span>
+            </strong>
+            <button class="btn-delete" onclick="event.stopPropagation(); deleteWish('${wish.id}')">❌</button>
+        </div>
+        
+        <div class="wish-details" id="details-${wish.id}" style="display: none;">
+    `;
 
     // Картинка товара (если есть)
     if (wish.image) {
-        htmlContent += `<img src="${wish.image}" style="width: 100%; max-height: 200px; border-radius: 8px; object-fit: contain; background: #f9f9f9; padding: 5px;">`;
+        htmlContent += `<img src="${wish.image}" style="width: 100%; max-height: 200px; border-radius: 8px; object-fit: contain; background: #f9f9f9; padding: 5px; margin-top: 10px;">`;
     }
 
     // Ссылка на покупку (если есть)
     if (wish.link) {
-        htmlContent += `<a href="${wish.link}" target="_blank" style="background: #f1f2f6; color: #2f3542; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: bold; width: 100%; text-align: center; transition: 0.2s;">🛒 Открыть в магазине</a>`;
+        htmlContent += `<a href="${wish.link}" target="_blank" style="display: block; background: #f1f2f6; color: #2f3542; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: bold; width: 100%; text-align: center; margin-top: 15px; box-sizing: border-box; transition: 0.2s;">🛒 Открыть в магазине</a>`;
     }
+
+    // Закрываем скрытый блок
+    htmlContent += `</div>`;
 
     li.innerHTML = htmlContent;
 
@@ -170,5 +177,21 @@ function filterWishes(who) {
         wifeCard.style.display = 'block';
     }
 }
+// Функция для раскрытия и скрытия карточки
+function toggleWishDetails(id) {
+    const detailsDiv = document.getElementById(`details-${id}`);
+    const arrowSpan = document.getElementById(`arrow-${id}`);
 
+    // Если пусто (нет ни картинки, ни ссылки) — нечего раскрывать
+    if (detailsDiv.innerHTML.trim() === '') return;
+
+    if (detailsDiv.style.display === 'none') {
+        detailsDiv.style.display = 'flex';
+        detailsDiv.style.flexDirection = 'column';
+        arrowSpan.innerText = '▲'; // Меняем стрелочку вверх
+    } else {
+        detailsDiv.style.display = 'none';
+        arrowSpan.innerText = '▼'; // Возвращаем стрелочку вниз
+    }
+}
 loadWishes();
