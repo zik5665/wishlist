@@ -1,5 +1,5 @@
 ﻿// ВАЖНО: Вставь сюда НОВУЮ ссылку из Google Apps Script!
-const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbyTaxF1m6ui6PaKDwlqF9E_JWHWzhciuw1OzMGUtvpMFZu0jrsYDhHYVRxivVmVgYs6yQ/exec';
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbzErOvwKa58E140t7Dw99aZDFrURiF7Iq6JeDLPsUdsUfn8iFdMNasUP82WfKc4GkUP/exec';
 // Обновленная функция для отрисовки красивой карточки
 // Обновленная функция для отрисовки карточки-аккордеона
 function renderSingleWish(wish) {
@@ -7,12 +7,16 @@ function renderSingleWish(wish) {
     li.className = 'wish-item';
     li.id = `wish-${wish.id}`;
 
+    // Добавляем атрибут data-category для фильтра
+    li.setAttribute('data-category', wish.category || 'Прочее');
+
     // Шапка карточки (кликабельная)
-    // event.stopPropagation() нужен, чтобы при нажатии на крестик меню не открывалось
     let htmlContent = `
         <div class="wish-header" onclick="toggleWishDetails('${wish.id}')">
-            <strong style="font-size: 16px; text-align: left;">
-                ${wish.item} <span class="arrow-icon" id="arrow-${wish.id}">▼</span>
+            <strong style="font-size: 16px; text-align: left; display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
+                ${wish.item} 
+                <span class="category-badge">${wish.category || 'Прочее'}</span>
+                <span class="arrow-icon" id="arrow-${wish.id}">▼</span>
             </strong>
             <button class="btn-delete" onclick="event.stopPropagation(); deleteWish('${wish.id}')">❌</button>
         </div>
@@ -102,6 +106,7 @@ async function addWish(user) {
 
     const text = titleInput.value.trim();
     const link = linkInput.value.trim();
+    const category = document.getElementById('categoryInput').value; // Забираем категорию
 
     if (!text) { alert("Введите название!"); return; }
 
@@ -121,13 +126,14 @@ async function addWish(user) {
 
     statusText.innerText = "⏳ Сохраняю вишлист...";
     const tempId = new Date().getTime().toString();
-    const wishData = { id: tempId, action: 'add', user: user, item: text, link: link, image: imageUrl };
+    const wishData = { id: tempId, action: 'add', user: user, item: text, link: link, image: imageUrl, category: category };
 
     renderSingleWish(wishData);
 
     titleInput.value = ''; linkInput.value = ''; imageInput.value = '';
     statusText.innerText = "✅ Готово!";
     setTimeout(() => statusText.innerText = '', 2000);
+    document.getElementById('categoryInput').value = 'Прочее';
 
     fetch(GOOGLE_API_URL, {
         method: 'POST',
@@ -206,4 +212,18 @@ function toggleWishDetails(id) {
         arrowSpan.innerText = '▼'; // Возвращаем стрелочку вниз
     }
 }
+
+// Фильтрация по категориям
+function filterByCategory(category) {
+    const allItems = document.querySelectorAll('.wish-item');
+    allItems.forEach(item => {
+        // Если выбрано "Все" ИЛИ категория карточки совпадает с выбранной
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+            item.style.display = 'block'; // Показываем
+        } else {
+            item.style.display = 'none';  // Прячем
+        }
+    });
+}
+
 loadWishes();

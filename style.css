@@ -298,3 +298,15 @@ h2 {
             background: #f1f2f6;
             transform: none; /* Убираем прыжок для этих кнопок */
         }
+/* Красивый тег категории рядом с названием */
+.category-badge {
+    font-size: 11px;
+    background: #f1f2f6;
+    color: #747d8c;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-weight: bold;
+    vertical-align: middle;
+    border: 1px solid #dfe4ea;
+}

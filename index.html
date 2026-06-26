@@ -11,6 +11,16 @@
     <h1> Вишлист</h1>
     <div class="top-menu">
         <button class="settings-btn" onclick="toggleSettings()">⚙️ Настройки ▼</button>
+
+        <select id="categoryFilter" class="settings-btn" onchange="filterByCategory(this.value)" style="margin-left: 10px; cursor: pointer; outline: none;">
+            <option value="all">📁 Все категории</option>
+            <option value="Техника">💻 Техника</option>
+            <option value="Вкусняшки">🍬 Вкусняшки</option>
+            <option value="Украшения">💍 Украшения</option>
+            <option value="Безделушки">🧸 Безделушки</option>
+            <option value="Прочее">📦 Прочее</option>
+        </select>
+
         <div id="settingsDropdown" class="settings-dropdown-content">
             <button onclick="filterWishes('all')">👀 Показывать всё</button>
             <button onclick="filterWishes('husband')">🧔 Только Мишины</button>
@@ -23,6 +33,14 @@
         <input type="text" id="wishInput" placeholder="Название (например: Робот-пылесос)">
 
         <input type="text" id="linkInput" placeholder="Ссылка на товар (Озон, WB...)">
+
+        <select id="categoryInput" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 8px; font-size: 16px; font-family: 'Nunito', sans-serif; color: #747d8c; outline: none;">
+            <option value="Прочее" selected>📦 Прочее (По умолчанию)</option>
+            <option value="Техника">💻 Техника</option>
+            <option value="Вкусняшки">🍬 Вкусняшки</option>
+            <option value="Украшения">💍 Украшения</option>
+            <option value="Безделушки">🧸 Безделушки</option>
+        </select>
 
         <div class="file-upload-wrapper">
             <input type="file" id="imageInput" accept="image/*" class="hidden-file-input">
