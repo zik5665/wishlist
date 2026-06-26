@@ -213,3 +213,59 @@ h2 {
     text-overflow: ellipsis; /* Добавляет троеточие, если имя файла слишком длинное */
     max-width: 200px;
 }
+/* --- Стили для меню настроек --- */
+.top-menu {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    z-index: 100; /* Чтобы меню выпадало ПОВЕРХ других элементов */
+}
+
+.settings-btn {
+    background: rgba(255, 255, 255, 0.85);
+    color: #2c3e50;
+    border: 2px solid #eee;
+    backdrop-filter: blur(10px);
+}
+
+    .settings-btn:hover {
+        background: white;
+    }
+
+/* Скрытый блок с кнопками */
+.settings-dropdown-content {
+    display: none; /* Скрыто по умолчанию */
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid #eee;
+}
+
+    /* Показываем блок, когда добавляется класс show */
+    .settings-dropdown-content.show {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    /* Кнопки внутри выпадающего меню */
+    .settings-dropdown-content button {
+        background: transparent;
+        color: #333;
+        text-align: left;
+        padding: 10px;
+        box-shadow: none;
+        border-radius: 6px;
+    }
+
+        .settings-dropdown-content button:hover {
+            background: #f1f2f6;
+            transform: none; /* Убираем прыжок для этих кнопок */
+        }

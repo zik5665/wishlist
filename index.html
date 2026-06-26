@@ -9,6 +9,14 @@
 <body>
 
     <h1> Вишлист</h1>
+    <div class="top-menu">
+        <button class="settings-btn" onclick="toggleSettings()">⚙️ Настройки ▼</button>
+        <div id="settingsDropdown" class="settings-dropdown-content">
+            <button onclick="filterWishes('all')">👀 Показывать всё</button>
+            <button onclick="filterWishes('husband')">🧔 Только Мишины</button>
+            <button onclick="filterWishes('wife')">👩 Только Катюшины</button>
+        </div>
+    </div>
 
     <div class="input-container" style="flex-direction: column;">
 
@@ -32,22 +40,22 @@
 
     <div class="lists-wrapper">
 
-        <div class="list-card">
+        <!-- Карточка Миши (с id для меню настроек и с аватаркой) -->
+        <div class="list-card" id="husbandCard">
             <h2 class="title-husband">
                 <img src="img/husband.png" class="avatar-icon" alt="Муж">
                 Миша
             </h2>
-            <ul class="wish-list" id="husbandList">
-            </ul>
+            <ul class="wish-list" id="husbandList"></ul>
         </div>
 
-        <div class="list-card wife-card">
+        <!-- Карточка Катюши (с id для меню настроек и с аватаркой) -->
+        <div class="list-card wife-card" id="wifeCard">
             <h2 class="title-wife">
                 <img src="img/wife.png" class="avatar-icon" alt="Жена">
                 Катюша
             </h2>
-            <ul class="wish-list" id="wifeList">
-            </ul>
+            <ul class="wish-list" id="wifeList"></ul>
         </div>
 
     </div>

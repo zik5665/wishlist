@@ -137,4 +137,38 @@ document.getElementById('imageInput').addEventListener('change', function (e) {
     }
 });
 
+// --- Логика меню настроек ---
+
+// Открытие/закрытие меню
+function toggleSettings() {
+    document.getElementById("settingsDropdown").classList.toggle("show");
+}
+
+// Закрываем меню, если кликнуть мимо него
+window.onclick = function (event) {
+    if (!event.target.matches('.settings-btn')) {
+        const dropdown = document.getElementById("settingsDropdown");
+        if (dropdown && dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+        }
+    }
+}
+
+// Фильтрация желаний
+function filterWishes(who) {
+    const husbandCard = document.getElementById('husbandCard');
+    const wifeCard = document.getElementById('wifeCard');
+
+    if (who === 'all') {
+        husbandCard.style.display = 'block';
+        wifeCard.style.display = 'block';
+    } else if (who === 'husband') {
+        husbandCard.style.display = 'block';
+        wifeCard.style.display = 'none';
+    } else if (who === 'wife') {
+        husbandCard.style.display = 'none';
+        wifeCard.style.display = 'block';
+    }
+}
+
 loadWishes();
