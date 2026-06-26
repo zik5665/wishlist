@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наш Семейный Вишлист</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1> Вишлист</h1>
+
+    <div class="input-container" style="flex-direction: column;">
+
+        <input type="text" id="wishInput" placeholder="Название (например: Робот-пылесос)">
+
+        <input type="text" id="linkInput" placeholder="Ссылка на товар (Озон, WB...)">
+
+        <div class="file-upload-wrapper">
+            <input type="file" id="imageInput" accept="image/*" class="hidden-file-input">
+            <label for="imageInput" class="custom-file-button">📷 Прикрепить фото</label>
+            <span id="fileName" class="file-name-text">Файл не выбран</span>
+        </div>
+
+        <div style="display: flex; gap: 10px; width: 100%; margin-top: 10px;">
+            <button class="btn-husband" onclick="addWish('муж')" style="flex: 1;">Добавить Мише</button>
+            <button class="btn-wife" onclick="addWish('жена')" style="flex: 1;">Добавить Катюше</button>
+        </div>
+
+        <div id="uploadStatus" style="color: gray; font-size: 12px; margin-top: 5px; text-align: center;"></div>
+    </div>
+
+    <div class="lists-wrapper">
+
+        <div class="list-card">
+            <h2 class="title-husband">
+                <img src="img/husband.png" class="avatar-icon" alt="Муж">
+                Миша
+            </h2>
+            <ul class="wish-list" id="husbandList">
+            </ul>
+        </div>
+
+        <div class="list-card wife-card">
+            <h2 class="title-wife">
+                <img src="img/wife.png" class="avatar-icon" alt="Жена">
+                Катюша
+            </h2>
+            <ul class="wish-list" id="wifeList">
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

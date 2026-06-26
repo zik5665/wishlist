@@ -1,0 +1,215 @@
+/* Подключаем красивый современный шрифт от Google */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+/* Главный фон всей страницы */
+body {
+    font-family: 'Nunito', sans-serif;
+    /* Вариант 1: Мягкий градиентный цвет */
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    /* Вариант 2: Картинка на фоне (уберите слеши /* в начале и в конце следующей строки, чтобы включить) */
+    background-image: url('img/background.jpg');
+
+    background-size: cover; /* Растягивать картинку на весь экран */
+    background-attachment: fixed; /* Картинка не едет при прокрутке */
+    background-position: center;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Заголовок */
+h1 {
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Легкая тень для объема */
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* Блок ввода (форма) */
+.input-container {
+    background: rgba(255, 255, 255, 0.85); /* Полупрозрачный белый */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px); /* Эффект матового стекла */
+}
+
+/* Поля для ввода текста */
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+    input[type="text"]:focus {
+        border-color: #4a90e2; /* Синий цвет при клике на поле */
+        outline: none;
+    }
+
+/* Общие стили для кнопок */
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; /* Плавность */
+    color: white;
+}
+
+    /* Эффект при наведении на кнопку */
+    button:hover {
+        transform: translateY(-2px); /* Кнопка чуть поднимается */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+/* Цвета кнопок */
+.btn-husband {
+    background: #8e9eab;
+}
+/* Красивый серо-голубой для Миши */
+
+.btn-wife {
+    background: #ff9a9e;
+}
+/* Нежный розово-персиковый для Катюши */
+
+
+/* Кнопка удаления (крестик) */
+.btn-delete {
+    background: transparent;
+    color: inherit;
+    padding: 5px;
+    box-shadow: none;
+}
+
+    .btn-delete:hover {
+        transform: scale(1.2);
+        box-shadow: none;
+    }
+
+/* Контейнер для списков карточек */
+.lists-wrapper {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    flex-wrap: wrap; /* Если экран узкий, списки встанут друг под другом */
+    justify-content: center;
+}
+
+/* Карточки Муж/Жена */
+.list-card {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-top: 6px solid #8e9eab;
+    backdrop-filter: blur(10px);
+}
+
+.wife-card {
+    border-top: 6px solid #ff9a9e;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.wish-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Сама карточка товара */
+.wish-item {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+    .wish-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+/* Настройки для аватарок в заголовках */
+.avatar-icon {
+    width: 40px; /* Ширина картинки */
+    height: 40px; /* Высота картинки */
+    border-radius: 50%; /* Делает картинку идеально круглой */
+    object-fit: cover; /* Картинка не сплющивается, а красиво обрезается */
+    vertical-align: middle; /* Выравнивает картинку по центру текста */
+    margin-right: 10px; /* Отступ справа от текста */
+    border: 2px solid white; /* Белая рамочка для красоты */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Легкая тень */
+}
+/* --- Стили для кастомной кнопки загрузки файла --- */
+
+/* Прячем страшную стандартную кнопку */
+.hidden-file-input {
+    display: none;
+}
+
+/* Контейнер, чтобы кнопка и текст стояли в ряд */
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Наша новая красивая кнопка */
+.custom-file-button {
+    background: #f1f2f6;
+    color: #2f3542;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    border: 2px solid #eee;
+}
+
+    .custom-file-button:hover {
+        background: #dfe4ea;
+        transform: translateY(-2px);
+    }
+
+/* Текст с названием выбранного файла */
+.file-name-text {
+    font-size: 14px;
+    color: #747d8c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Добавляет троеточие, если имя файла слишком длинное */
+    max-width: 200px;
+}
