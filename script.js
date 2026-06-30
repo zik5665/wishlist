@@ -1,5 +1,5 @@
 ﻿// ВАЖНО: Вставьте СЮДА новую ссылку после развертывания!
-const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbyUQMHg6vE5jgqGVmmJX6-yOY33FEXtxH01vypcYWE5FjYQrVrCjs4LUJ5CK5VJxK5Umw/exec';
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbxdGSXjHj0E3eHEWim0RGIRATt_5XLC_w_EO2Rt-VsqJwO5N-xElbziHwStFBeUEVRpOg/exec';
 
 // --- 1. ОТРИСОВКА КАРТОЧЕК ---
 function renderSingleWish(wish) {
