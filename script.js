@@ -226,4 +226,34 @@ function filterByCategory(category) {
     });
 }
 
+// --- ЛОГИКА ПАЛИТРЫ ЦВЕТОВ И ПАМЯТИ ---
+
+const colorPicker = document.getElementById('themeColorPicker');
+
+// Вспомогательная функция: переводит цвет из HEX (#ffffff) в RGB (255, 255, 255) для нашего матового стекла
+function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+}
+
+// 1. Проверяем, есть ли сохраненный цвет в памяти браузера при входе
+const savedColor = localStorage.getItem('myThemeColor');
+if (savedColor) {
+    colorPicker.value = savedColor; // Ставим цвет в палитру
+    document.documentElement.style.setProperty('--card-color', hexToRgb(savedColor)); // Применяем к сайту
+}
+
+// 2. Слушаем, когда пользователь крутит палитру
+colorPicker.addEventListener('input', function (event) {
+    const chosenHexColor = event.target.value;
+
+    // Красим окошки в реальном времени
+    document.documentElement.style.setProperty('--card-color', hexToRgb(chosenHexColor));
+
+    // Сохраняем выбор в вечную память браузера
+    localStorage.setItem('myThemeColor', chosenHexColor);
+});
+
 loadWishes();

@@ -1,3 +1,9 @@
+/* Переменные сайта */
+:root {
+    /* Базовый цвет окошек в формате RGB (белый по умолчанию) */
+    --card-color: 255, 255, 255;
+}
+
 /* Подключаем красивый современный шрифт от Google */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
 
@@ -34,7 +40,7 @@ h1 {
 
 /* Блок ввода (форма) */
 .input-container {
-    background: rgba(255, 255, 255, 0.85); /* Полупрозрачный белый */
+    background: rgba(var(--card-color), 0.85);
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -120,7 +126,7 @@ button {
 .list-card {
     flex: 1;
     min-width: 300px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(var(--card-color), 0.85);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);

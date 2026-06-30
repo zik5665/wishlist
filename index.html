@@ -22,6 +22,11 @@
         </select>
 
         <div id="settingsDropdown" class="settings-dropdown-content">
+            <label style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; margin-bottom: 5px;">
+                🎨 Цвет окон
+                <input type="color" id="themeColorPicker" value="#ffffff" style="border: none; width: 30px; height: 30px; cursor: pointer; padding: 0; background: transparent;">
+            </label>
+
             <button onclick="filterWishes('all')">👀 Показывать всё</button>
             <button onclick="filterWishes('husband')">🧔 Только Мишины</button>
             <button onclick="filterWishes('wife')">👩 Только Катюшины</button>
