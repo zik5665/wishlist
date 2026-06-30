@@ -316,3 +316,71 @@ h2 {
     vertical-align: middle;
     border: 1px solid #dfe4ea;
 }
+/* --- Всплывающее уведомление (Таймер отмены) --- */
+.undo-toast {
+    position: fixed;
+    bottom: -100px; /* Спрятано за экраном по умолчанию */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2f3542;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Красивый отскок при появлении */
+    z-index: 1000;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+}
+
+    /* Класс, который показывает уведомление */
+    .undo-toast.show {
+        bottom: 30px;
+    }
+
+.undo-btn {
+    background: #ff6b81;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: none;
+}
+
+    .undo-btn:hover {
+        background: #ff4757;
+        transform: none;
+    }
+
+/* --- Стили для функции "Уже куплено" --- */
+.btn-bought {
+    background: transparent;
+    border: 1px solid #2ed573;
+    color: #2ed573;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: none;
+}
+
+    .btn-bought:hover {
+        background: #2ed573;
+        color: white;
+        transform: scale(1.05);
+    }
+
+/* Класс, который делает карточку "подаренной" */
+.item-is-bought {
+    text-decoration: line-through;
+    opacity: 0.5;
+    background: #f1f2f6;
+}
