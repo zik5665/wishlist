@@ -57,9 +57,10 @@
                 Таймер отмены (3 сек)
             </label>
 
-            <button onclick="filterWishes('all')">👀 Показывать всё</button>
-            <button onclick="filterWishes('husband')">🧔 Только Мишины</button>
-            <button onclick="filterWishes('wife')">👩 Только Катюшины</button>
+            <button onclick="filterWishes('all')">👀 Только активные (Все)</button>
+            <button onclick="filterWishes('husband')">🧔 Активные Мишины</button>
+            <button onclick="filterWishes('wife')">👩 Активные Катюшины</button>
+            <button onclick="filterWishes('history')" style="color: #4a90e2; font-weight: bold; border-top: 1px solid #eee; margin-top: 5px;">📜 История подарков</button>
         </div>
     </div>
 
@@ -117,7 +118,8 @@
         <span>Удалено.</span>
         <button onclick="cancelDelete()" class="undo-btn">↩ Отменить</button>
     </div>
+    <input type="file" id="historyImageInput" accept="image/*" style="display: none;">
 
     <script src="script.js"></script>
-</body>
+</body> 
 </html>

@@ -359,24 +359,55 @@ h2 {
     }
 
 /* --- Стили для функции "Уже куплено" --- */
+/* --- Стили для иконок Подарено/Вернуть --- */
 .btn-bought {
     background: transparent;
     border: 1px solid #2ed573;
     color: #2ed573;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 800;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: none;
+    padding: 0;
 }
 
     .btn-bought:hover {
         background: #2ed573;
         color: white;
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
+
+/* Кнопка "В историю" */
+.btn-history {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+    .btn-history:hover {
+        background: #357abd;
+    }
+
+/* Фото в истории */
+.history-real-img {
+    width: 100%;
+    border-radius: 10px;
+    border: 4px solid #ffd32a; /* Золотая рамочка для подаренного */
+    margin-top: 10px;
+}
 
 /* Класс, который делает карточку "подаренной" */
 .item-is-bought {
