@@ -74,12 +74,13 @@ function renderSingleWish(wish) {
 
 // --- 2. ЗАГРУЗКА, ДОБАВЛЕНИЕ, ФИЛЬТРЫ ---
 async function loadWishes() {
-    const response = await fetch(GOOGLE_API_URL);
+    // Добавляем текущее время в конец ссылки, чтобы браузер всегда запрашивал свежие данные, а не брал из кэша
+    const response = await fetch(GOOGLE_API_URL + '?t=' + new Date().getTime());
     const wishes = await response.json();
     document.getElementById('husbandList').innerHTML = '';
     document.getElementById('wifeList').innerHTML = '';
     wishes.forEach(wish => renderSingleWish(wish));
-    filterWishes('all'); // По умолчанию показываем только активные
+    filterWishes('all');
     checkAchievements();
 }
 
@@ -130,9 +131,15 @@ document.getElementById('historyImageInput').addEventListener('change', async fu
     if (e.target.files.length === 0) return;
     const file = e.target.files[0];
     const id = currentHistoryId;
-    const statusText = document.getElementById('uploadStatus');
 
-    statusText.innerText = "📸 Загружаем фото в Зал Славы...";
+    // ВАЖНО: Текст статуса появляется в самом верху экрана (над инпутами)!
+    const statusText = document.getElementById('uploadStatus');
+    statusText.innerText = "📸 Загружаем фото в Зал Славы (подождите пару секунд)...";
+
+    // Мгновенно прячем карточку для красоты, чтобы не ждать ответа Гугла
+    const itemElement = document.getElementById(`wish-${id}`);
+    if (itemElement) itemElement.style.display = 'none';
+
     try {
         const realImageUrl = await uploadImageToDrive(file);
 
@@ -145,11 +152,15 @@ document.getElementById('historyImageInput').addEventListener('change', async fu
         statusText.innerText = "✅ Успешно перенесено в Историю!";
         setTimeout(() => { statusText.innerText = ''; }, 3000);
 
-        // Перезагружаем список, чтобы карточка обновилась
-        loadWishes();
+        // Навсегда помечаем её как историю в коде страницы
+        if (itemElement) itemElement.setAttribute('data-history', 'true');
+        checkAchievements();
     } catch (error) {
         statusText.innerText = "❌ Ошибка загрузки фото";
+        if (itemElement) itemElement.style.display = 'block'; // Возвращаем карточку, если интернет пропал
         console.error(error);
+    } finally {
+        e.target.value = ''; // Сбрасываем память инпута, чтобы можно было загружать еще фото
     }
 });
 
