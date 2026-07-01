@@ -1,5 +1,5 @@
 ﻿// ВАЖНО: Вставьте СЮДА новую ссылку после развертывания!
-const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbxdGSXjHj0E3eHEWim0RGIRATt_5XLC_w_EO2Rt-VsqJwO5N-xElbziHwStFBeUEVRpOg/exec';
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbwcI95reF6rh2-R1CQRCggaL-KUPs_mJWbYZljBZm5aLQqM7FInrlr4zN6apj0lrEKk/exec';
 
 // --- 1. ОТРИСОВКА КАРТОЧЕК ---
 function renderSingleWish(wish) {
@@ -132,11 +132,9 @@ document.getElementById('historyImageInput').addEventListener('change', async fu
     const file = e.target.files[0];
     const id = currentHistoryId;
 
-    // ВАЖНО: Текст статуса появляется в самом верху экрана (над инпутами)!
     const statusText = document.getElementById('uploadStatus');
     statusText.innerText = "📸 Загружаем фото в Зал Славы (подождите пару секунд)...";
 
-    // Мгновенно прячем карточку для красоты, чтобы не ждать ответа Гугла
     const itemElement = document.getElementById(`wish-${id}`);
     if (itemElement) itemElement.style.display = 'none';
 
@@ -152,15 +150,16 @@ document.getElementById('historyImageInput').addEventListener('change', async fu
         statusText.innerText = "✅ Успешно перенесено в Историю!";
         setTimeout(() => { statusText.innerText = ''; }, 3000);
 
-        // Навсегда помечаем её как историю в коде страницы
-        if (itemElement) itemElement.setAttribute('data-history', 'true');
-        checkAchievements();
+        // Скачиваем свежие данные и АВТОМАТИЧЕСКИ переключаем вас в Историю!
+        await loadWishes();
+        filterWishes('history');
+
     } catch (error) {
         statusText.innerText = "❌ Ошибка загрузки фото";
-        if (itemElement) itemElement.style.display = 'block'; // Возвращаем карточку, если интернет пропал
+        if (itemElement) itemElement.style.display = 'block';
         console.error(error);
     } finally {
-        e.target.value = ''; // Сбрасываем память инпута, чтобы можно было загружать еще фото
+        e.target.value = '';
     }
 });
 
